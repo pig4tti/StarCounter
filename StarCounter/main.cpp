@@ -8,8 +8,46 @@
 
 #include <iostream>
 
+struct DIGIT {
+    short value;
+    DIGIT *nextDigit;
+    
+    void increment() {
+        if (value < 9) {
+            this->value++;
+        } else {
+            this->value = 0;
+            
+            if (this->nextDigit == NULL) {
+                DIGIT nextDigit = {};
+                this->nextDigit = &nextDigit;
+            }
+            
+            this->nextDigit->increment();
+        }
+    }
+    
+    std::string toString () {
+        std::string nextDigitRepresentation = "";
+        
+        if (this->nextDigit != NULL) {
+            nextDigitRepresentation = this->nextDigit->toString();
+        }
+        
+        return nextDigitRepresentation + std::to_string(this->value);
+    }
+    
+} decimal_digit_representation;
+
+
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
-    return 0;
+    DIGIT firstDigit;
+    
+    int i = 0;
+    while (i < 123456789) {
+        firstDigit.increment();
+        i++;
+    }
+    
+    std::cout << firstDigit.toString();
 }
