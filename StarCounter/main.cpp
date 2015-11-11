@@ -41,13 +41,15 @@ struct DIGIT {
 
 
 int main(int argc, const char * argv[]) {
-    DIGIT firstDigit;
+    DIGIT digitChain;
     
     int i = 0;
     while (i < 123456789) {
-        firstDigit.increment();
+        digitChain.increment();
         i++;
     }
     
-    std::cout << firstDigit.toString();
+    std::cout << digitChain.toString();
+    
+    return 0;
 }
